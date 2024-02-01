@@ -24,12 +24,12 @@ class Product(models.Model):
     name = models.CharField(max_length=250, unique=True)
     slug = models.SlugField(max_length=250, unique=True)
     description = models.TextField(blank=True)
-    Category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     price =models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='product/', blank=True)
     stock = models.IntegerField()
     available = models.BooleanField(default=True)
-    Created = models.DateTimeField(auto_now_add = True)
+    created = models.DateTimeField(auto_now_add = True)
     updated = models.DateTimeField(auto_now = True)
     
     class Meta:
@@ -37,8 +37,39 @@ class Product(models.Model):
         verbose_name = 'product'
         verbose_name_plural = 'products'
     
+    def get_url(self):
+        return reverse("product_detail", args=[self.category.slug, self.slug])
+    
     def __str__(self):
         return self.name
+    
+
+class Cart(models.Model):
+    cart_id = models.CharField(max_length=250, blank=True)
+    date_added = models.DateField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['date_added']
+        db_table = 'Cart'
+        
+    def __str__(self):
+        return self.name
+    
+
+class CartItem(models.Model):  #contains information about one product 
+    product = models.ForeignKey(Product, on_delete=models.CASCADE) #relation one-to-many
+    cart = models.ForeignKey(Cart, on_delete= models.CASCADE) 
+    quantity = models.IntegerField()
+    active = models.BooleanField(default=True)
+    
+    class Meta:
+        db_table = 'CartItem' #name of the table
+        
+    def sub_total(self): #calculate the total price 
+        return self.product.price * self.quantity
+    
+    def __str__(self):
+        return self.product
     
         
     

@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
       <link rel="stylesheet" href="{% static 'css/base.css'%}">
+      <link rel="stylesheet" href="{% static 'css/cart.css'%}">
     <style type="text/css">
         .material-icons.md-48 { font-size: 48px; }
         .material-icons.md-20 { font-size: 20px; }
@@ -19,11 +20,6 @@
     <title>{% block title %} {% endblock %}</title>
   </head>
   <body>
-   <!--  <header>
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'product' %}">Product</a>
-    </header>
-    -->
     
     {% include 'navbar.html' %}
 
