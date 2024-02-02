@@ -19,3 +19,11 @@ body{
     text-transform: uppercase;
     letter-spacing: .2em;
 }
+
+.errorList li {
+    color: red;
+    font-weight: bold;
+}
+
+/* error class exist in django by default*/
+
