@@ -27,3 +27,6 @@ body{
 
 /* error class exist in django by default*/
 
+.custom_div{
+    margin-bottom: 20px !important;
+}
